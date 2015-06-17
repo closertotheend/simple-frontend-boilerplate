@@ -27,7 +27,6 @@ Basic layout. WOW! (0___o)
 
 #### TODO:
 * Add Grunt Support?
-* NodeJS
 * YAGNI?
 
 #### If You Do Not Like Some Library:
