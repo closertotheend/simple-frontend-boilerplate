@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>List of users</title>
+    <!-- Css reset -->
+    <link rel="stylesheet" type="text/css" href="lib/normalize.css">
+
+    <!-- Simple css grid library -->
+    <link rel="stylesheet" type="text/css" href="lib/pocketgrid.min.css">
+
+    <!-- Custom css-->
+    <link rel="stylesheet" type="text/css" href="css/base.css">
+
+    <!--Menu-->
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+</head>
+
+<body>
+<div class="block-group">
+    <div id="header" class="block">
+
+        <div id='cssmenu'>
+            <ul>
+                <li class='active'><a href='#'><span>Home</span></a></li>
+                <li><a href='pages/another.html'><span>More</span></a></li>
+                <li><a href='#'><span>And More</span></a></li>
+                <li class='last'><a href='#'><span>And More...</span></a></li>
+            </ul>
+        </div>
+
+    </div>
+    <div id="main" class="block block-padding">
+
+        <div id="add_user_form_block" class="block" style="width: 50%;min-width: 400px;">
+            <!-- center div -->
+            <div style="width: 400px;margin: 0 auto;">
+                <h3>Add Someone</h3>
+
+                <form id="add_user_form">
+                    <table class="table-form">
+                        <tr>
+                            <td>
+                                <label for="name_of_user">User name</label>
+                            </td>
+                            <td>
+                                <input id="name_of_user" class="input-medium" type="text" required name="name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="user_birth_date">Date of birth</label>
+                            </td>
+                            <td>
+                                <input id="user_birth_date" class="input-medium" type="date" required
+                                       name="date_of_birth">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input class="button" type="submit" value="Submit">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+
+        <div id="show_users" class="block" style="width: 50%; min-width: 400px">Loading...</div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="lib/jquery-2.1.4.min.js"></script>
+<!-- Simple js client side templating-->
+<script src="lib/microtemplating.js"></script>
+<!-- Util-->
+<script src="js/util.js"></script>
+
+<!-- js client side templating-->
+<script type="text/html" id="show_users_template">
+    <h3>List Of Users</h3>
+    <ul>
+        <% for ( var i = 0; i < users.length; i++ ) { %>
+        <li><%= users[i].name %> with birthday on <%= users[i].date_of_birth %></li>
+        <% } %>
+    </ul>
+</script>
+
+<script>
+    loadUsers();
+    saveUser();
+
+    function loadUsers() {
+        var showUserElem = $("#show_users");
+        $.ajax("http://localhost:4567/users")
+                .done(function (response) {
+                    showUserElem.html(tmpl("show_users_template", {users: response}));
+                }).fail(function (jqXHR, textStatus) {
+                    showUserElem.html("Error occurred");
+                    console.log("Request failed: " + textStatus);
+                });
+    }
+
+    function saveUser() {
+        var addUserFormElem = $('#add_user_form');
+        addUserFormElem.submit(function (e) {
+            e.preventDefault();
+            var formData = JSON.stringify(Util.getFormData(addUserFormElem));
+            $.ajax({
+                url: 'http://localhost:4567/user',
+                dataType: 'json',
+                type: 'POST',
+                data: formData
+            }).done(function () {
+                location.reload();
+            }).fail(function (jqXHR, textStatus) {
+                alert("Error occurred");
+                console.log("Request failed: " + textStatus);
+            });
+        });
+    }
+</script>
+
+</body>
+
+</html>

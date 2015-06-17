@@ -1,0 +1,35 @@
+body {
+    background-image: url("../img/background.png");
+    font-family: Verdana, Geneva, sans-serif;
+    line-height: 1.75em;
+    font-size: 1.2em;
+}
+
+.button {
+    padding: 12px;
+    background-color: #ccc;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    border:none;
+}
+
+.button:hover {
+    border: none;
+    background:#aaa;
+}
+
+.block-padding{
+    padding: 20px;
+}
+
+.table-form td{
+    padding-bottom: 30px;
+    padding-right: 8px;
+}
+
+.input-medium {
+    width: 250px;
+    height: 30px;
+}
+
