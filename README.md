@@ -2,7 +2,7 @@
 
 Frontend part for backend project: https://github.com/ilja903/java-backend-boilerplate 
 
-But could be used separately!
+Could be used separately!
 
 **To install:** Push it to NGINX or Apache or somewhere else.
 
