@@ -2,7 +2,7 @@
 
 Frontend part for backend project: https://github.com/ilja903/java-backend-boilerplate 
 
-Could be used separately!
+But could be used with any rest backend!
 
 **To install:** Push it to NGINX or Apache or somewhere else.
 
@@ -18,7 +18,7 @@ Idea 2 per 2015: Client side templating rocks!
 ###### JS:
 
 * Microtemplating (http://ejohn.org/blog/javascript-micro-templating/)
-* JQuery (I know it is big, but ajax in JQuery is so convenient:'( )
+* JQuery
 
 #### TODO:
 * Add Grunt Support?
